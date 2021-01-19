@@ -1,4 +1,4 @@
-Datasets used in publication see 
+## Datasets used in publication see 
 
 <div id="ref-Collin_2020" class="csl-entry">
 
@@ -10,3 +10,45 @@ Using DIYABC Random Forest,” July.
 <https://doi.org/10.22541/au.159480722.26357192>.
 
 </div>
+
+## Command lines used
+
+### Scenario choice
+
+1. Simulation of a training set with 12000 particles (6 scenarios, 2000 particles per scenario cf. corresponding `header.txt`)
+
+    ```bash
+    ./diyabc ./ -R "" -r 12000 -g 50 -m -t 32
+    ```
+
+    ---> reftable of 12000 records with all stats, "loopsize" of 50, computed on 32 cores
+
+2. pour faire random forest scenario choice sur le training set obtenu via 1/ (foret de 1000 arbre)
+
+   - Without scenario grouping
+
+       ```bash
+       ./abcranger -n 12000 -t 1000 -j 32 -o modelchoice_results_no_grouping
+       ```
+
+   - With scenario grouping, two groups of 3 scenarios
+
+       ```bash
+       ./abcranger -n 12000 -t 1000 -g "1,2,3;4,5,6" -j 32 -o modelchoice_results_with_grouping
+       ```
+
+### Parameter estimation
+
+1. Simulation of a training set with 10000 particles for only one scenario cf. best scenario for scenario choice  ( cf. corresponding `header.txt`)
+
+    ```bash
+    ./diyabc ./ -R "" -r 10000 -g 50 -m -t 32
+    ```
+
+    ---> reftable of 10000 records with all stats, "loopsize" of 50, computed on 32 cores
+
+2. To estimate `ra` parameter of scenario 1 from the obtained training set, with PLS (cf. selection of 95% variance explaining axis)
+
+    ```bash
+    ./abcranger -n 10000 -t 1000 -j 32 --parameter ra --chosenscen 1 --plsmaxvar 0.95 --noob 10000 -o estim_param_ra_with_PLS
+    ```
