@@ -13,12 +13,22 @@ Using DIYABC Random Forest,” July.
 
 ## Command lines used
 
+### Prerequisite: Random Seed File
+
+In the case you have more than 32 computing cores at your disposal, you should regenerate the random seeds file :
+
+```bash
+./diyabc -p ./ -n "t:<n>" 
+```
+
+where `<n>` is the number of your available cores.
+
 ### Scenario choice
 
 1. Simulation of a training set with 12000 particles (6 scenarios, 2000 particles per scenario cf. corresponding `header.txt`)
 
     ```bash
-    ./diyabc ./ -R "" -r 12000 -g 50 -m -t 32
+    ./diyabc -p ./ -R ALL -r 12000 -g 50 -m -t 32
     ```
 
     ---> reftable of 12000 records with all stats, "loopsize" of 50, computed on 32 cores
@@ -42,7 +52,7 @@ Using DIYABC Random Forest,” July.
 1. Simulation of a training set with 10000 particles for only one scenario cf. best scenario for scenario choice  ( cf. corresponding `header.txt`)
 
     ```bash
-    ./diyabc ./ -R "" -r 10000 -g 50 -m -t 32
+    ./diyabc -p ./ -R ALL -r 10000 -g 50 -m -t 32
     ```
 
     ---> reftable of 10000 records with all stats, "loopsize" of 50, computed on 32 cores
