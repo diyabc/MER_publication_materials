@@ -1,4 +1,4 @@
-## Datasets used in publication see 
+# Datasets used in publication :
 
 <div id="ref-Collin_2020" class="csl-entry">
 
@@ -33,7 +33,7 @@ where `<n>` is the number of your available cores.
 
     ---> reftable of 12000 records with all stats, "loopsize" of 50, computed on 32 cores
 
-2. pour faire random forest scenario choice sur le training set obtenu via 1/ (foret de 1000 arbre)
+2. To do a random forest scenario choice from the previously obtained training (1000 trees forest)
 
    - Without scenario grouping
 
